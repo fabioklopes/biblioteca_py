@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from app.models import Author, Book
+from app.models import Author, Book, Member
 
 
 def index(request):
@@ -18,7 +18,7 @@ def books(request):
 
 
 def members(request):
-    members = Members.objects.all()
+    members = Member.objects.all()
     return render(request, 'members.html', {'members':members})
 
 

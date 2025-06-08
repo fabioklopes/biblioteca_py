@@ -62,3 +62,20 @@ class Member(models.Model):
     
     def __str__(self):
         return self.member_name
+
+
+class Loan(models.Model):
+    member = models.ForeignKey(Member, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    loan_date = models.DateTimeField()
+    return_date = models.DateTimeField()
+
+    class Meta:
+        ordering = ["loan_date"]
+        verbose_name = "Empréstimo"
+        verbose_name_plural = "Empréstimos"
+    
+    def __str__(self):
+        return f"{self.member.member_name} - {self.loan_date}"
+
+
