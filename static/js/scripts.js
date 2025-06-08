@@ -7,7 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
         contentSections.forEach(section => {
             section.style.display = 'none';
         });
+
         const activeSection = document.getElementById(id);
+        
         if (activeSection) {
             activeSection.style.display = 'block';
             currentSectionTitle.textContent = activeSection.querySelector('.section-title') ? activeSection.querySelector('.section-title').textContent : (id.charAt(0).toUpperCase() + id.slice(1)).replace('-', ' '); // Título dinâmico

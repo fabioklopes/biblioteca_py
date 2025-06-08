@@ -1,0 +1,29 @@
+{% extends 'template.html' %}
+{% block title %}Lista de Livros{% endblock %}
+
+{% block content %}
+<section id="settings" class="content-section" style="display: none;">
+    <h2 class="section-title">Configurações do Sistema</h2>
+    <div class="form-section">
+        <h3>Informações da Biblioteca</h3>
+        <form>
+            <label for="library-name">Nome da Biblioteca:</label>
+            <input type="text" id="library-name" value="Biblioteca Central" name="library_name">
+
+            <label for="library-address">Endereço:</label>
+            <input type="text" id="library-address" value="Rua das Letras, 123" name="library_address">
+
+            <label for="admin-email">Email de Contato do Administrador:</label>
+            <input type="email" id="admin-email" value="admin@biblioteca.com" name="admin_email">
+
+            <button type="submit"><i class="fas fa-save"></i> Salvar Configurações</button>
+        </form>
+    </div>
+
+    <div class="form-section">
+        <h3>Gerenciamento de Usuários (Administradores)</h3>
+        <p>Aqui você pode gerenciar as contas de administradores do sistema.</p>
+        <button><i class="fas fa-user-shield"></i> Gerenciar Usuários Admin</button>
+    </div>
+</section>
+{% endblock %}

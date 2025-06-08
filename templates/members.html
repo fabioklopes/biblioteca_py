@@ -2,5 +2,62 @@
 {% block title %}Lista de Membros{% endblock %}
 
 {% block content %}
-    <h1>Membros</h1>
+<section id="members" class="content-section" style="display: none;">
+    <h2 class="section-title">Gestão de Membros</h2>
+
+    <div class="form-section">
+        <h3>Adicionar Novo Membro</h3>
+        <form>
+            <label for="member-name">Nome Completo:</label>
+            <input type="text" id="member-name" name="name" required>
+
+            <label for="member-email">Email:</label>
+            <input type="email" id="member-email" name="email" required>
+
+            <label for="member-phone">Telefone:</label>
+            <input type="text" id="member-phone" name="phone">
+
+            <button type="submit"><i class="fas fa-user-plus"></i> Adicionar Membro</button>
+        </form>
+    </div>
+
+    <h2 class="section-title">Membros Cadastrados</h2>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Telefone</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>001</td>
+                <td>João Silva</td>
+                <td>joao.silva@email.com</td>
+                <td>(11) 98765-4321</td>
+                <td>
+                    <div class="action-buttons">
+                        <button title="Editar"><i class="fas fa-edit"></i></button>
+                        <button class="delete" title="Excluir"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>002</td>
+                <td>Maria Santos</td>
+                <td>maria.santos@email.com</td>
+                <td>(21) 91234-5678</td>
+                <td>
+                    <div class="action-buttons">
+                        <button title="Editar"><i class="fas fa-edit"></i></button>
+                        <button class="delete" title="Excluir"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
 {% endblock %}

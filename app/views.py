@@ -22,3 +22,13 @@ def members(request):
     return render(request, 'members.html', {'members':members})
 
 
+def loans(request):
+    loans = Loans.objects.all()
+    return render(request, 'loans.html', {'loans':loans})
+
+
+def configurations(request):
+    loans = Configurations.objects.all()
+    return render(request, 'configurations.html', {'configurations':configurations})
+
+
