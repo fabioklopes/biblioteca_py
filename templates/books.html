@@ -1,0 +1,8 @@
+{% extends 'template.html' %}
+{% block title %}Lista de Livros{% endblock %}
+
+{% block content %}
+    {% for book in books %}
+        {{ book.book_name }}
+    {% endfor %}
+{% endblock %}

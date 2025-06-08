@@ -1,0 +1,333 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pyteca - {% block title %}{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Pyteca</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Início</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'list_all_authors' %}"><i class="bi bi-pencil"></i> Autores</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'list_all_books' %}"><i class="bi bi-book"></i> Livros</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-person-hearts"></i> Membros</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-arrow-repeat"></i> Empréstimos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-gear-wide-connected"></i> Configurações</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <header class="header">
+                <h1>Dashboard</h1>
+                <div class="user-info">
+                    <span>Olá, Administrador</span>
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </header>
+
+            <section id="dashboard" class="content-section active">
+                <div class="cards">
+                    <div class="card">
+                        <i class="fas fa-book-open"></i>
+                        <h3>Total de Livros</h3>
+                        <p>1,250</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-user-friends"></i>
+                        <h3>Total de Membros</h3>
+                        <p>580</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-handshake"></i>
+                        <h3>Livros Emprestados</h3>
+                        <p>150</p>
+                    </div>
+                    <div class="card">
+                        <i class="fas fa-calendar-check"></i>
+                        <h3>Empréstimos Vencidos</h3>
+                        <p>12</p>
+                    </div>
+                </div>
+
+                <h2 class="section-title">Atividade Recente</h2>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Evento</th>
+                            <th>Detalhes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>05/06/2025</td>
+                            <td>Novo Livro Adicionado</td>
+                            <td>"O Senhor dos Anéis" por J.R.R. Tolkien</td>
+                        </tr>
+                        <tr>
+                            <td>04/06/2025</td>
+                            <td>Empréstimo Registrado</td>
+                            <td>"1984" para João Silva</td>
+                        </tr>
+                        <tr>
+                            <td>03/06/2025</td>
+                            <td>Devolução Registrada</td>
+                            <td>"Dom Quixote" por Maria Santos</td>
+                        </tr>
+                        <tr>
+                            <td>02/06/2025</td>
+                            <td>Novo Membro</td>
+                            <td>Pedro Costa</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="books" class="content-section" style="display: none;">
+                <h2 class="section-title">Gestão de Livros</h2>
+
+                <div class="form-section">
+                    <h3>Adicionar Novo Livro</h3>
+                    <form>
+                        <label for="book-title">Título do Livro:</label>
+                        <input type="text" id="book-title" name="title" required>
+
+                        <label for="book-author">Autor:</label>
+                        <input type="text" id="book-author" name="author" required>
+
+                        <label for="book-isbn">ISBN:</label>
+                        <input type="text" id="book-isbn" name="isbn">
+
+                        <label for="book-quantity">Quantidade:</label>
+                        <input type="number" id="book-quantity" name="quantity" min="1" value="1" required>
+
+                        <label for="book-genre">Gênero:</label>
+                        <input type="text" id="book-genre" name="genre">
+
+                        <button type="submit"><i class="fas fa-plus-circle"></i> Adicionar Livro</button>
+                    </form>
+                </div>
+
+                <h2 class="section-title">Livros Cadastrados</h2>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Autor</th>
+                            <th>ISBN</th>
+                            <th>Quantidade</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>O Pequeno Príncipe</td>
+                            <td>Antoine de Saint-Exupéry</td>
+                            <td>978-85-XXXX-XX-X</td>
+                            <td>10</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button title="Editar"><i class="fas fa-edit"></i></button>
+                                    <button class="delete" title="Excluir"><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Cem Anos de Solidão</td>
+                            <td>Gabriel García Márquez</td>
+                            <td>978-85-XXXX-XX-X</td>
+                            <td>7</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button title="Editar"><i class="fas fa-edit"></i></button>
+                                    <button class="delete" title="Excluir"><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="members" class="content-section" style="display: none;">
+                <h2 class="section-title">Gestão de Membros</h2>
+
+                <div class="form-section">
+                    <h3>Adicionar Novo Membro</h3>
+                    <form>
+                        <label for="member-name">Nome Completo:</label>
+                        <input type="text" id="member-name" name="name" required>
+
+                        <label for="member-email">Email:</label>
+                        <input type="email" id="member-email" name="email" required>
+
+                        <label for="member-phone">Telefone:</label>
+                        <input type="text" id="member-phone" name="phone">
+
+                        <button type="submit"><i class="fas fa-user-plus"></i> Adicionar Membro</button>
+                    </form>
+                </div>
+
+                <h2 class="section-title">Membros Cadastrados</h2>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>Telefone</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>001</td>
+                            <td>João Silva</td>
+                            <td>joao.silva@email.com</td>
+                            <td>(11) 98765-4321</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button title="Editar"><i class="fas fa-edit"></i></button>
+                                    <button class="delete" title="Excluir"><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>002</td>
+                            <td>Maria Santos</td>
+                            <td>maria.santos@email.com</td>
+                            <td>(21) 91234-5678</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button title="Editar"><i class="fas fa-edit"></i></button>
+                                    <button class="delete" title="Excluir"><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="loans" class="content-section" style="display: none;">
+                <h2 class="section-title">Gestão de Empréstimos</h2>
+
+                <div class="form-section">
+                    <h3>Registrar Novo Empréstimo</h3>
+                    <form>
+                        <label for="loan-member">Membro:</label>
+                        <select id="loan-member" name="member" required>
+                            <option value="">Selecione um membro</option>
+                            <option value="joao_silva">João Silva</option>
+                            <option value="maria_santos">Maria Santos</option>
+                        </select>
+
+                        <label for="loan-book">Livro:</label>
+                        <select id="loan-book" name="book" required>
+                            <option value="">Selecione um livro</option>
+                            <option value="pequeno_principe">O Pequeno Príncipe</option>
+                            <option value="cem_anos_solidao">Cem Anos de Solidão</option>
+                        </select>
+
+                        <label for="loan-date">Data de Empréstimo:</label>
+                        <input type="date" id="loan-date" name="loan_date" required>
+
+                        <label for="return-date">Data de Devolução Prevista:</label>
+                        <input type="date" id="return-date" name="return_date" required>
+
+                        <button type="submit"><i class="fas fa-plus-circle"></i> Registrar Empréstimo</button>
+                    </form>
+                </div>
+
+                <h2 class="section-title">Empréstimos Ativos</h2>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Membro</th>
+                            <th>Livro</th>
+                            <th>Data Empréstimo</th>
+                            <th>Data Devolução</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>João Silva</td>
+                            <td>1984</td>
+                            <td>01/06/2025</td>
+                            <td>15/06/2025</td>
+                            <td><span style="color: green;">Ativo</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button title="Registrar Devolução"><i class="fas fa-undo"></i></button>
+                                    <button class="delete" title="Cancelar Empréstimo"><i
+                                            class="fas fa-times-circle"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Pedro Costa</td>
+                            <td>O Guia do Mochileiro das Galáxias</td>
+                            <td>28/05/2025</td>
+                            <td>11/06/2025</td>
+                            <td><span style="color: orange;">Vencendo</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button title="Registrar Devolução"><i class="fas fa-undo"></i></button>
+                                    <button class="delete" title="Cancelar Empréstimo"><i
+                                            class="fas fa-times-circle"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="settings" class="content-section" style="display: none;">
+                <h2 class="section-title">Configurações do Sistema</h2>
+                <div class="form-section">
+                    <h3>Informações da Biblioteca</h3>
+                    <form>
+                        <label for="library-name">Nome da Biblioteca:</label>
+                        <input type="text" id="library-name" value="Biblioteca Central" name="library_name">
+
+                        <label for="library-address">Endereço:</label>
+                        <input type="text" id="library-address" value="Rua das Letras, 123" name="library_address">
+
+                        <label for="admin-email">Email de Contato do Administrador:</label>
+                        <input type="email" id="admin-email" value="admin@biblioteca.com" name="admin_email">
+
+                        <button type="submit"><i class="fas fa-save"></i> Salvar Configurações</button>
+                    </form>
+                </div>
+
+                <div class="form-section">
+                    <h3>Gerenciamento de Usuários (Administradores)</h3>
+                    <p>Aqui você pode gerenciar as contas de administradores do sistema.</p>
+                    <button><i class="fas fa-user-shield"></i> Gerenciar Usuários Admin</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>
