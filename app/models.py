@@ -13,24 +13,24 @@ class Author(models.Model):
         return self.author_name
 
 
-class Book(models.Model):
-    GENRE = [
-        ('romance', 'Romance'),
-        ('poesia', 'Poesia'),
-        ('ficcao_cientifica', 'Ficção Científica'),
-        ('fantasia', 'Fantasia'),
-        ('suspense', 'Suspense'),
-        ('misterio', 'Mistério'),
-        ('terror', 'Terror'),
-        ('cronica', 'Crônica'),
-        ('novela', 'Novela'),
-    ]
+class Genre(models.Model):
+    genre_title = models.CharField(max_length=25, unique=True, null=False, blank=False)
 
+    class Meta:
+        ordering = ['genre_title']
+        verbose_name = "Gênero"
+        verbose_name_plural = "Gêneros"
+    
+    def __str__(self):
+        return self.genre_title
+
+
+class Book(models.Model):
     book_name = models.CharField(max_length=80, null=False, blank=False)
     book_code = models.CharField(max_length=128, unique=True, null=False, blank=False)
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     book_year = models.IntegerField(null=True, blank=True)
-    book_genre = models.CharField(choices=GENRE)
+    genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['book_name']
@@ -76,6 +76,6 @@ class Loan(models.Model):
         verbose_name_plural = "Empréstimos"
     
     def __str__(self):
-        return f"{self.member.member_name} - {self.loan_date}"
+        return f"{self.member.member_name} - {self.loan_date.strftime('%d/%m/%Y')} às {self.loan_date.strftime('%H:%M:%S')}"
 
 
