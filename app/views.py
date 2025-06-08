@@ -27,8 +27,8 @@ def loans(request):
     return render(request, 'loans.html', {'loans':loans})
 
 
-def configurations(request):
-    loans = Configurations.objects.all()
-    return render(request, 'configurations.html', {'configurations':configurations})
+# def configurations(request):
+#     loans = Configurations.objects.all()
+#     return render(request, 'configurations.html', {'configurations':configurations})
 
 

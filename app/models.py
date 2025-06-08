@@ -49,11 +49,11 @@ class Member(models.Model):
     ]
     member_name = models.CharField(max_length=80, null=False, blank=False)
     member_email = models.EmailField(max_length=80, unique=True, null=False, blank=False)
-    member_phone = models.CharField(max_length=11, unique=True, null=False, blank=False)
+    member_phone = models.CharField(max_length=11, null=False, blank=False)
     member_type = models.CharField(choices=TYPE)
     create_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
-    member_active = models.BooleanField(default=False)
+    member_active = models.BooleanField(default=True)
 
     class Meta:
         ordering =['member_name']

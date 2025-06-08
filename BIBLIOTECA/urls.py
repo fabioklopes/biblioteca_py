@@ -10,5 +10,5 @@ urlpatterns = [
     path('books/', views.books, name="books"),
     path('members/', views.members, name="members"),
     path('loans/', views.loans, name="loans"),
-    path('configurations/', views.configurations, name="configurations"),
+    # path('configurations/', views.configurations, name="configurations"),
 ]
