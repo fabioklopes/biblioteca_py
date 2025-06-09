@@ -1,34 +1,42 @@
+import datetime
+from datetime import timedelta
 from django.shortcuts import render
-
-from app.models import Author, Book, Member
+from app.models import Book, Member, Loan
 
 
 def index(request):
-    return render(request, 'index.html')
+    total_books = Book.objects.all().count()
+    total_members = Member.objects.all().count()
+    total_loans = Loan.objects.all().count()
+    # loan_date = Loan.objects.get().loan_date.strftime("%d/%m/%Y %H:%M:%S")
+
+    # if loan_date:
+    #     expire_date = loan_date + timedelta(days=7)
+
+    context = {
+        'total_books': total_books,
+        'total_members': total_members,
+        'total_loans': total_loans,
+        # 'expire_date': expire_date,
+    }
+    return render(request, 'index.html', context)
 
 
 def authors(request):
-    authors = Author.objects.all()
-    return render(request, 'authors.html', {'authors':authors})
+    return render(request, 'authors.html')
 
 
 def books(request):
-    books = Book.objects.all()
-    return render(request, 'books.html', {'books':books})
+    return render(request, 'index.html')
 
 
 def members(request):
-    members = Member.objects.all()
-    return render(request, 'members.html', {'members':members})
+    return render(request, 'members.html')
 
 
 def loans(request):
-    loans = Loans.objects.all()
-    return render(request, 'loans.html', {'loans':loans})
-
+    return render(request, 'loans.html')
 
 # def configurations(request):
 #     loans = Configurations.objects.all()
 #     return render(request, 'configurations.html', {'configurations':configurations})
-
-
